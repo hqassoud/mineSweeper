@@ -1,0 +1,63 @@
+body {
+	text-align: center;
+    color: #7F5151;
+    font-family: Verdana;
+	margin: 0;
+    padding: 0;
+    border: none;
+    background-color: none;
+}
+
+#minesweeper {
+    min-width: 400px;
+	margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.square {
+	cursor: pointer;
+	width: 32px;
+    height: 32px;
+	line-height: 32px;
+    font-size: 20px;
+    background-color: gray;
+    display: inline-block;
+    margin: 2.5px;
+}
+
+#flag { 
+	background-image: url("/static/imgs/flag.png");
+	cursor: pointer;
+	width: 32px;
+    height: 32px;
+	line-height: 32px;
+    font-size: 20px;
+    display: inline-block;
+    margin: 2.5px;
+}
+
+#menuContainer {
+    margin-top: 10px;
+	height: 80px;
+    font-size: 36px;
+	overflow: hidden;
+}
+.menuTopLeft{ float: left; width: 20%; }
+.menuTopRight{ float: right; width: 20%; font-weight: bold; color: red; }
+.menuTopCenter{ display: inline-block; width: 60%; }
+
+.smiley { height: 26px; width: 32px; background-color: white; }
+.bomb { height: 26px; width: 32px; background-color: white; }
+.clear { background-color: #eee; color: #777; }
+
+#gameFinished {
+	text-align: center;
+    background-color: yellow;
+    color: blue;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+	font-weight: bold;
+	width: 25%;
+	margin: 0 auto;
+}

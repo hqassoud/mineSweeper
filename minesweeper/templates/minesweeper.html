@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Free Online Minesweeper</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'minesweeper.css' %}">
+		<script src="{% static 'minesweeper.js' %}"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function () { //wait page to load
+				if(prompt('Load Existing Game? (y/n)') === 'y') {
+					var gameId = prompt('Please Insert Game Id:');
+					while(validGameId(gameId) == false){
+						gameId = prompt('Invalid gameId. Please Insert a valid one:');
+					}
+					document.getElementById("gameid").innerHTML = gameId;
+					loadExistingGame(gameId);
+					var rows = 12;
+					var columns = 12;
+				} else {
+					do{ //get desired # of rows & columns from user
+						var rows = prompt('Please enter the number of rows: (min 5 max 25) ');
+						var columns = prompt('Please enter the number of columns: (min 5 max 25)');
+						var numBombs = prompt('Please enter the number of bombs: (min 1 max ' + ((rows*columns/2)) +')' );
+					}while( rows < 5 || rows > 25 || columns < 5 || columns > 25 || numBombs < 1 || numBombs > ((rows*columns)/2) );
+					var gameId = 1111;
+					//GET REQUEST HERE
+					document.getElementById("gameid").innerHTML = gameId;
+					startNewGame(rows, columns, numBombs); // start minesweeper game
+				}
+				var start = Date.now(); //This is the timer implementation
+				setInterval(function() {
+					var delta = Date.now() - start; // milliseconds elapsed since start
+					document.getElementById("timer").innerHTML = Math.floor(delta / 1000); // in seconds
+				}, 1000); // update about every second
+				
+				$('#gameFinished').click(function () { // when user clicks the play again button (NOTE: use jQuery instead of JS! because it's much easier since we want to keep the same # of rows & columns)
+					numBombs = Math.round(1 + (Math.random() * ((rows*columns/ 2)) - 1)); //generate new # of bombs (to spice things up a little)
+					startNewGame(rows, columns, numBombs);
+					start = Date.now();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="menuContainer">
+			<div class="menuTopLeft"> <p id="numBombs">10</p> </div>
+			<div class="menuTopCenter">Free Online Minesweeper</div>
+			<div class="menuTopRight"> <p id="timer">0</p> </div>
+		</div>
+		<div>
+			<p>YOUR GAME ID</p>
+			<p id="gameid">1000</p>
+		<div>
+		<div id="minesweeper"></div>
+		<div id="gameFinished">New Game?</div>
+	</body>
+</html>
